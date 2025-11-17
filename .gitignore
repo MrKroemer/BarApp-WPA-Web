@@ -1,0 +1,78 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production build
+build/
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Images that shouldn't be in repo
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.ico
+
+# Documentation files (optional - remove if you want to track them)
+*_REPORT.md
+COMPLETE_SYSTEM_REPORT.md
+DEPLOYMENT_GUIDE.md
+FINAL_IMPLEMENTATION_REPORT.md
+MOBILE_FIXES_REPORT.md
+MOBILE_RESPONSIVENESS_REPORT.md
+QUALITY_CHECKLIST.md
+README_COMPLETO*.md
+SYSTEM_VALIDATION.md
+VALIDATION_REPORT.md
+
+# Duplicate files
+*.html
+!public/index.html

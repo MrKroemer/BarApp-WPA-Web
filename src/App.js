@@ -7,6 +7,7 @@ import { ThemeContextProvider } from './utils/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import AuthPage from './pages/AuthPage';
 import QREntry from './pages/QREntry';
+import ClienteEntry from './pages/ClienteEntry';
 import DashboardLayout from './components/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
@@ -29,6 +30,7 @@ function App() {
     <ThemeContextProvider>
       <Routes>
         <Route path="/qr/:tableId" element={<QREntry />} />
+        <Route path="/cliente" element={<ClienteEntry />} />
         <Route path="/*" element={
           loading ? (
             <Box 

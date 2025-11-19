@@ -5,7 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 
 const AuthForm = () => {
   const [userType, setUserType] = useState('customer'); // 'customer', 'owner'
-  const [step, setStep] = useState('user-type'); // 'user-type', 'qr', 'info', 'owner-login'
+  const [step, setStep] = useState('main'); // 'main', 'user-type', 'qr', 'info', 'owner-login'
   const [qrScanned, setQrScanned] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -127,10 +127,32 @@ const AuthForm = () => {
       <Button
         fullWidth
         variant="text"
-        onClick={() => setStep('user-type')}
+        onClick={() => setStep('main')}
         sx={{ color: '#ff6b35' }}
       >
         Voltar
+      </Button>
+    </>
+  );
+
+  const renderMainStep = () => (
+    <>
+      <Button
+        fullWidth
+        variant="contained"
+        onClick={() => { setUserType('customer'); setStep('qr'); }}
+        sx={{ mb: 2, bgcolor: '#ff6b35', '&:hover': { bgcolor: '#e55a2b' } }}
+      >
+        Entrar com QR Code
+      </Button>
+      
+      <Button
+        fullWidth
+        variant="outlined"
+        onClick={() => setStep('user-type')}
+        sx={{ mb: 2, color: '#fff', borderColor: '#fff' }}
+      >
+        Outras opções
       </Button>
     </>
   );
@@ -161,9 +183,18 @@ const AuthForm = () => {
         onClick={handleGoogleLogin}
         startIcon={<Google />}
         disabled={loading}
-        sx={{ color: '#fff', borderColor: '#fff' }}
+        sx={{ mb: 2, color: '#fff', borderColor: '#fff' }}
       >
         Entrar com Google
+      </Button>
+      
+      <Button
+        fullWidth
+        variant="text"
+        onClick={() => setStep('main')}
+        sx={{ color: '#ff6b35' }}
+      >
+        Voltar
       </Button>
     </>
   );
@@ -279,6 +310,7 @@ const AuthForm = () => {
         {step === 'qr' && renderQRStep()}
         {step === 'info' && renderInfoStep()}
         {step === 'owner-login' && renderOwnerLoginStep()}
+        {step === 'main' && renderMainStep()}
       </Card>
     </Box>
   );

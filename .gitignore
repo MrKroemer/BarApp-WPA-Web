@@ -52,8 +52,7 @@ coverage/
 *.tmp
 *.temp
 
-# Images that shouldn't be in repo
-*.jpg
+# Images that shouldn't be in repo (except bardobode.jpg)
 *.jpeg
 *.png
 *.gif

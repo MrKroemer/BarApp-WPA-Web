@@ -29,9 +29,12 @@ function App() {
   return (
     <ThemeContextProvider>
       <Routes>
+        {/* Rotas públicas */}
         <Route path="/qr/:tableId" element={<QREntry />} />
         <Route path="/cliente" element={<ClienteEntry />} />
-        <Route path="/*" element={
+        
+        {/* Rota raiz e outras */}
+        <Route path="/" element={
           loading ? (
             <Box 
               display="flex" 
@@ -95,6 +98,25 @@ function App() {
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>
             </DashboardLayout>
+          )
+        } />
+        
+        {/* Catch-all para outras rotas */}
+        <Route path="*" element={
+          loading ? (
+            <Box 
+              display="flex" 
+              justifyContent="center" 
+              alignItems="center" 
+              minHeight="100vh"
+              bgcolor="background.default"
+            >
+              <CircularProgress size={60} />
+            </Box>
+          ) : !user ? (
+            <AuthPage />
+          ) : (
+            <Navigate to="/dashboard" replace />
           )
         } />
       </Routes>

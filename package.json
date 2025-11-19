@@ -3,28 +3,42 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.0",
-    "firebase": "^10.5.0",
-    "@mui/material": "^5.11.0",
-    "@mui/icons-material": "^5.11.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
-    "zustand": "^4.3.0",
-    "date-fns": "^2.29.0",
-    "recharts": "^2.5.0"
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.0",
+    "chart.js": "^4.5.1",
+    "date-fns": "^2.30.0",
+    "firebase": "^10.5.0",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "recharts": "^2.5.0",
+    "zustand": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "serve": "npx serve -s build -l 3000"
+    "serve": "npx serve -s build -l 3000",
+    "deploy": "npm run build && firebase deploy",
+    "deploy:hosting": "npm run build && firebase deploy --only hosting",
+    "analyze": "npm run build && npx serve -s build",
+    "test:build": "npm run build && npm run serve"
   },
   "devDependencies": {
     "react-scripts": "5.0.1"
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Typography, Card, CardContent, Grid, TextField, Button } from '@mui/material';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { Download, TrendingUp } from '@mui/icons-material';
 import { useDataStore } from '../store/useStore';
 import EmptyState from '../components/EmptyState';
+import { SalesChart, ProductsChart, StatusChart } from '../components/Charts';
+import { format, subDays } from 'date-fns';
 
 const Reports = () => {
   const { orders, products } = useDataStore();

@@ -6,6 +6,7 @@ import { useAuthStore, useUIStore } from '../store/useStore';
 import { useAuth } from '../hooks/useFirebase';
 import { useTheme } from '../utils/ThemeContext';
 import { canAccessRoute } from '../utils/permissions';
+import NotificationCenter from './NotificationCenter';
 
 const DRAWER_WIDTH = 280;
 const MOBILE_DRAWER_WIDTH = 260;
@@ -140,6 +141,7 @@ const DashboardLayout = ({ children }) => {
                 return userProfile?.name || user?.displayName;
               })()}
             </Typography>
+            <NotificationCenter />
             <IconButton
               color="inherit"
               onClick={toggleTheme}

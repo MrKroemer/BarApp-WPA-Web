@@ -5,6 +5,8 @@ import { useAuth, useFirebaseData } from './hooks/useFirebase';
 import { useAuthStore } from './store/useStore';
 import { ThemeContextProvider } from './utils/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import ConnectionStatus from './components/ConnectionStatus';
+import './styles/animations.css';
 import AuthPage from './pages/AuthPage';
 import ClienteEntry from './pages/ClienteEntry';
 import DashboardLayout from './components/DashboardLayout';
@@ -27,6 +29,7 @@ function App() {
 
   return (
     <ThemeContextProvider>
+      <ConnectionStatus />
       <Routes>
         <Route path="/cliente" element={<ClienteEntry />} />
         <Route path="/*" element={

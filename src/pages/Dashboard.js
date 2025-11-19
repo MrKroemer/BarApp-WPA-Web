@@ -4,6 +4,7 @@ import { TrendingUp, ShoppingCart, People, Inventory, AttachMoney, Assessment, M
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore, useDataStore } from '../store/useStore';
 import { useFirebaseData } from '../hooks/useFirebase';
+import { useMetrics, useCustomerMetrics } from '../hooks/useMetrics';
 import AnimatedCard from '../components/AnimatedCard';
 
 const MetricCard = ({ title, value, icon, color, onClick, delay = 0 }) => (
@@ -58,6 +59,8 @@ const Dashboard = () => {
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   const isOwner = userProfile?.isOwner;
+  const advancedMetrics = useMetrics(isOwner ? 'owner' : 'customer');
+  const advancedCustomerMetrics = useCustomerMetrics(userProfile?.id);
 
   const formatCurrency = (value) => `R$ ${(value || 0).toFixed(2)}`;
 

@@ -6,7 +6,6 @@ import { useAuthStore } from './store/useStore';
 import { ThemeContextProvider } from './utils/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import AuthPage from './pages/AuthPage';
-import QREntry from './pages/QREntry';
 import ClienteEntry from './pages/ClienteEntry';
 import DashboardLayout from './components/DashboardLayout';
 import Dashboard from './pages/Dashboard';
@@ -17,7 +16,6 @@ import Customers from './pages/Customers';
 import Reports from './pages/Reports';
 import Cashback from './pages/Cashback';
 import Menu from './pages/Menu';
-import MenuProtected from './components/MenuProtected';
 import MyOrders from './pages/MyOrders';
 import Profile from './pages/Profile';
 
@@ -30,14 +28,8 @@ function App() {
   return (
     <ThemeContextProvider>
       <Routes>
-        {/* Rotas públicas */}
-        <Route path="/qr/:tableId" element={<QREntry />} />
         <Route path="/cliente" element={<ClienteEntry />} />
-        <Route path="/menu" element={<MenuProtected />} />
-
-        
-        {/* Rota raiz e outras */}
-        <Route path="/" element={
+        <Route path="/*" element={
           loading ? (
             <Box 
               display="flex" 
@@ -86,8 +78,7 @@ function App() {
                     <Cashback />
                   </ProtectedRoute>
                 } />
-
-
+                <Route path="/menu" element={<Menu />} />
                 <Route path="/my-orders" element={
                   <ProtectedRoute requiredRoute="/my-orders">
                     <MyOrders />
@@ -102,25 +93,6 @@ function App() {
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>
             </DashboardLayout>
-          )
-        } />
-        
-        {/* Catch-all para outras rotas */}
-        <Route path="*" element={
-          loading ? (
-            <Box 
-              display="flex" 
-              justifyContent="center" 
-              alignItems="center" 
-              minHeight="100vh"
-              bgcolor="background.default"
-            >
-              <CircularProgress size={60} />
-            </Box>
-          ) : !user ? (
-            <AuthPage />
-          ) : (
-            <Navigate to="/dashboard" replace />
           )
         } />
       </Routes>

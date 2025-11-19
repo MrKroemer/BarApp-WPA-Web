@@ -28,8 +28,8 @@ const ClienteEntry = () => {
     
     localStorage.setItem('customerSession', JSON.stringify(customerData));
     
-    // Redirecionar para o menu
-    navigate('/menu');
+    // Redirecionar para o dashboard
+    navigate('/dashboard');
     setLoading(false);
   };
 

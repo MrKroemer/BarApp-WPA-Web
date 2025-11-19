@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, signOut, signInAnonymously } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db, googleProvider } from '../services/firebase';
 
@@ -48,6 +48,19 @@ export const useAuth = () => {
     return result;
   };
 
+  const loginWithQR = async ({ name, phone, isOwner = false }) => {
+    const result = await signInAnonymously(auth);
+    await setDoc(doc(db, 'users', result.user.uid), {
+      id: result.user.uid,
+      name,
+      phone,
+      isOwner,
+      loginMethod: 'qr',
+      createdAt: new Date().toISOString()
+    });
+    return result;
+  };
+
   const loginWithGoogle = async () => {
     const result = await signInWithPopup(auth, googleProvider);
     const existingProfile = await getUserProfile(result.user.uid);
@@ -70,6 +83,7 @@ export const useAuth = () => {
     loading,
     loginWithEmail,
     registerWithEmail,
+    loginWithQR,
     loginWithGoogle,
     logout
   };

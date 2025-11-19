@@ -62,7 +62,10 @@ const DashboardLayout = ({ children }) => {
             <ListItem
               key={item.path}
               button
-              onClick={() => navigate(item.path)}
+              onClick={() => {
+                navigate(item.path);
+                setSidebarOpen(false);
+              }}
               sx={{
                 borderRadius: 2,
                 mb: 1,

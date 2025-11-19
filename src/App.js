@@ -33,6 +33,7 @@ function App() {
         {/* Rotas públicas */}
         <Route path="/qr/:tableId" element={<QREntry />} />
         <Route path="/cliente" element={<ClienteEntry />} />
+        <Route path="/menu" element={<MenuProtected />} />
 
         
         {/* Rota raiz e outras */}
@@ -85,7 +86,7 @@ function App() {
                     <Cashback />
                   </ProtectedRoute>
                 } />
-                <Route path="/menu" element={<Menu />} />
+
 
                 <Route path="/my-orders" element={
                   <ProtectedRoute requiredRoute="/my-orders">

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Card, Typography, Button, TextField, Alert } from '@mui/material';
-import { signInAnonymously } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { auth, db } from '../services/firebase';
 
 const ClienteEntry = () => {
   const navigate = useNavigate();
@@ -21,27 +18,19 @@ const ClienteEntry = () => {
 
     setLoading(true);
     
-    try {
-      // Criar usuário anônimo no Firebase
-      const result = await signInAnonymously(auth);
-      
-      // Salvar dados do cliente no Firestore
-      await setDoc(doc(db, 'users', result.user.uid), {
-        id: result.user.uid,
-        name: name.trim(),
-        phone: phone.trim(),
-        isOwner: false,
-        loginMethod: 'qr',
-        createdAt: new Date().toISOString()
-      });
-      
-      // Redirecionar para o menu (agora como usuário autenticado)
-      navigate('/menu');
-    } catch (err) {
-      setError('Erro ao entrar no sistema: ' + err.message);
-    } finally {
-      setLoading(false);
-    }
+    // Salvar dados do cliente no localStorage
+    const customerData = {
+      name: name.trim(),
+      phone: phone.trim(),
+      entryTime: new Date().toISOString(),
+      isGuest: true
+    };
+    
+    localStorage.setItem('customerSession', JSON.stringify(customerData));
+    
+    // Redirecionar para o menu
+    navigate('/menu');
+    setLoading(false);
   };
 
   return (

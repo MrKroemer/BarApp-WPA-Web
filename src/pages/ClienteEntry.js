@@ -18,19 +18,29 @@ const ClienteEntry = () => {
 
     setLoading(true);
     
-    // Salvar dados do cliente no localStorage
-    const customerData = {
-      name: name.trim(),
-      phone: phone.trim(),
-      entryTime: new Date().toISOString(),
+    // Criar um "usuário" temporário para o cliente QR
+    const guestUser = {
+      uid: 'guest_' + Date.now(),
+      displayName: name.trim(),
+      email: null,
       isGuest: true
     };
     
-    localStorage.setItem('customerSession', JSON.stringify(customerData));
+    const guestProfile = {
+      id: guestUser.uid,
+      name: name.trim(),
+      phone: phone.trim(),
+      isOwner: false,
+      loginMethod: 'qr',
+      createdAt: new Date().toISOString()
+    };
     
-    // Redirecionar para o dashboard
-    navigate('/dashboard');
-    setLoading(false);
+    // Salvar no localStorage para simular autenticação
+    localStorage.setItem('guestUser', JSON.stringify(guestUser));
+    localStorage.setItem('guestProfile', JSON.stringify(guestProfile));
+    
+    // Forçar reload para ativar a "autenticação"
+    window.location.href = '/dashboard';
   };
 
   return (

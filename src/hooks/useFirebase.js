@@ -13,11 +13,21 @@ export const useAuth = () => {
         setUser(user);
         const profile = await getUserProfile(user.uid);
         setUserProfile(profile);
+        setLoading(false);
       } else {
-        setUser(null);
-        setUserProfile(null);
+        // Verificar se há cliente QR
+        const guestUser = localStorage.getItem('guestUser');
+        const guestProfile = localStorage.getItem('guestProfile');
+        
+        if (guestUser && guestProfile) {
+          setUser(JSON.parse(guestUser));
+          setUserProfile(JSON.parse(guestProfile));
+        } else {
+          setUser(null);
+          setUserProfile(null);
+        }
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return unsubscribe;
@@ -73,6 +83,10 @@ export const useAuth = () => {
   };
 
   const logout = async () => {
+    // Limpar sessão de cliente QR
+    localStorage.removeItem('guestUser');
+    localStorage.removeItem('guestProfile');
+    
     await signOut(auth);
   };
 

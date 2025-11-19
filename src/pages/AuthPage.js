@@ -76,18 +76,19 @@ const AuthPage = () => {
     >
       <Card sx={{ maxWidth: 420, width: '100%', backgroundColor: 'background.paper' }}>
         <CardContent sx={{ p: 4 }}>
-          <Typography
-            variant="h4"
-            align="center"
-            sx={{
-              mb: 4,
-              fontWeight: 700,
-              color: 'primary.main',
-              textShadow: '0 2px 10px rgba(255, 107, 53, 0.3)'
-            }}
-          >
-            🍺 Bar do Bode
-          </Typography>
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <img 
+              src="/bardobode.jpg" 
+              alt="Bar do Bode" 
+              style={{ 
+                width: '150px', 
+                height: '150px', 
+                borderRadius: '50%', 
+                border: '3px solid #ff6b35',
+                objectFit: 'cover'
+              }}
+            />
+          </Box>
 
           {error && (
             <Alert severity="error" sx={{ mb: 3 }}>

@@ -49,10 +49,20 @@ const DashboardLayout = ({ children }) => {
 
   const drawer = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ p: 3, borderBottom: 1, borderColor: 'divider' }}>
-        <Typography variant="h5" sx={{ fontWeight: 700, color: 'primary.main', textAlign: 'center' }}>
-          🍺 Bar do Bode
-        </Typography>
+      <Box sx={{ pt: '90px', px: 3, pb: 3, borderBottom: 1, borderColor: 'divider', textAlign: 'center' }}>
+        <img 
+          src="/bardobode.jpg" 
+          alt="Bar do Bode" 
+          style={{ 
+            width: '120px', 
+            height: '120px', 
+            borderRadius: '50%', 
+            position: 'relative',
+            zIndex: 10,
+            display: 'block',
+            margin: '0 auto'
+          }}
+        />
       </Box>
       
       <List sx={{ flex: 1, px: 2, py: 1 }}>
@@ -121,7 +131,14 @@ const DashboardLayout = ({ children }) => {
               variant="outlined"
             />
             <Typography variant="body2" sx={{ display: { xs: 'none', sm: 'block' } }}>
-              {userProfile?.name || user?.displayName}
+              {(() => {
+                const customerSession = localStorage.getItem('customerSession');
+                if (customerSession) {
+                  const data = JSON.parse(customerSession);
+                  return data.name;
+                }
+                return userProfile?.name || user?.displayName;
+              })()}
             </Typography>
             <IconButton
               color="inherit"

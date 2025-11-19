@@ -104,10 +104,6 @@ const AuthForm = () => {
 
   const renderQRStep = () => (
     <>
-      <Typography variant="h6" align="center" sx={{ mb: 2, color: '#fff' }}>
-        Escaneie o QR Code da mesa
-      </Typography>
-      
       <Box sx={{ position: 'relative', mb: 2 }}>
         <video
           ref={videoRef}
@@ -123,19 +119,24 @@ const AuthForm = () => {
         variant="contained"
         startIcon={<QrCodeScanner />}
         onClick={scanQR}
-        sx={{ bgcolor: '#ff6b35', '&:hover': { bgcolor: '#e55a2b' } }}
+        sx={{ mb: 2, bgcolor: '#ff6b35', '&:hover': { bgcolor: '#e55a2b' } }}
       >
-        Escanear QR Code
+        Detectar QR Code
+      </Button>
+      
+      <Button
+        fullWidth
+        variant="text"
+        onClick={() => setStep('user-type')}
+        sx={{ color: '#ff6b35' }}
+      >
+        Voltar
       </Button>
     </>
   );
 
   const renderUserTypeStep = () => (
     <>
-      <Typography variant="h6" align="center" sx={{ mb: 3, color: '#fff' }}>
-        Como você quer entrar?
-      </Typography>
-      
       <Button
         fullWidth
         variant="contained"
@@ -149,19 +150,26 @@ const AuthForm = () => {
         fullWidth
         variant="outlined"
         onClick={() => { setUserType('owner'); setStep('owner-login'); }}
-        sx={{ color: '#fff', borderColor: '#fff' }}
+        sx={{ mb: 2, color: '#fff', borderColor: '#fff' }}
       >
         Sou Proprietário
+      </Button>
+      
+      <Button
+        fullWidth
+        variant="outlined"
+        onClick={handleGoogleLogin}
+        startIcon={<Google />}
+        disabled={loading}
+        sx={{ color: '#fff', borderColor: '#fff' }}
+      >
+        Entrar com Google
       </Button>
     </>
   );
 
   const renderInfoStep = () => (
     <>
-      <Typography variant="h6" align="center" sx={{ mb: 2, color: '#fff' }}>
-        Seus dados
-      </Typography>
-      
       <form onSubmit={handleInfoSubmit}>
         <TextField
           fullWidth
@@ -196,10 +204,6 @@ const AuthForm = () => {
 
   const renderOwnerLoginStep = () => (
     <>
-      <Typography variant="h6" align="center" sx={{ mb: 2, color: '#fff' }}>
-        Login do Proprietário
-      </Typography>
-      
       <form onSubmit={handleOwnerSubmit}>
         <TextField
           fullWidth
@@ -255,9 +259,19 @@ const AuthForm = () => {
   return (
     <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#211111', p: 2 }}>
       <Card sx={{ maxWidth: 400, width: '100%', p: 3, bgcolor: '#2a2a2a' }}>
-        <Typography variant="h4" align="center" sx={{ mb: 3, color: '#fff', fontWeight: 'bold' }}>
-          Bar do Bode
-        </Typography>
+        <Box sx={{ textAlign: 'center', mb: 3 }}>
+          <img 
+            src="/bardobode.jpg" 
+            alt="Bar do Bode" 
+            style={{ 
+              width: '150px', 
+              height: '150px', 
+              borderRadius: '50%', 
+              border: '3px solid #ff6b35',
+              objectFit: 'cover'
+            }}
+          />
+        </Box>
         
         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
         
@@ -265,17 +279,6 @@ const AuthForm = () => {
         {step === 'qr' && renderQRStep()}
         {step === 'info' && renderInfoStep()}
         {step === 'owner-login' && renderOwnerLoginStep()}
-        
-        <Button
-          fullWidth
-          variant="outlined"
-          startIcon={<Google />}
-          onClick={handleGoogleLogin}
-          disabled={loading}
-          sx={{ mt: 2, color: '#fff', borderColor: '#fff' }}
-        >
-          Entrar com Google
-        </Button>
       </Card>
     </Box>
   );

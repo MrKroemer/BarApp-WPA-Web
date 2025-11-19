@@ -13,7 +13,6 @@ export const useAuth = () => {
         setUser(user);
         const profile = await getUserProfile(user.uid);
         setUserProfile(profile);
-        setLoading(false);
       } else {
         // Verificar se há cliente QR
         const guestUser = localStorage.getItem('guestUser');
@@ -26,8 +25,8 @@ export const useAuth = () => {
           setUser(null);
           setUserProfile(null);
         }
-        setLoading(false);
       }
+      setLoading(false);
     });
 
     return unsubscribe;

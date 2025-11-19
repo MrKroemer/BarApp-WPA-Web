@@ -17,6 +17,7 @@ import Customers from './pages/Customers';
 import Reports from './pages/Reports';
 import Cashback from './pages/Cashback';
 import Menu from './pages/Menu';
+import MenuProtected from './components/MenuProtected';
 import MyOrders from './pages/MyOrders';
 import Profile from './pages/Profile';
 
@@ -32,6 +33,7 @@ function App() {
         {/* Rotas públicas */}
         <Route path="/qr/:tableId" element={<QREntry />} />
         <Route path="/cliente" element={<ClienteEntry />} />
+
         
         {/* Rota raiz e outras */}
         <Route path="/" element={
@@ -84,6 +86,7 @@ function App() {
                   </ProtectedRoute>
                 } />
                 <Route path="/menu" element={<Menu />} />
+
                 <Route path="/my-orders" element={
                   <ProtectedRoute requiredRoute="/my-orders">
                     <MyOrders />
